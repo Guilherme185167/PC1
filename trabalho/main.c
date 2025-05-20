@@ -1,57 +1,159 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ncurses.h>
 
 #define tit 30
-void cabeca()
-{
-
-    system("clear");
-    for (int i = 0; i < tit; i++)
-    {
-        printf("+");
-    }
-    puts("");
-    printf("|\033[33m BEM VINDO(A) AO PENSE BEM! \033[m|\n");
-
-    for (int i = 0; i < tit; i++)
-    {
-        printf("+");
-    }
-    puts("");
-}
-void livros()
-{
-    printf("\033[7;31mESCOLHA UM LIVRO:\033[m\n\n\033[1;32mAtividades Programadas Nº 01 \033[m\n\033[1;34mAtividades Programadas Nº 02\033[m\n::");
-}
 
 void livro1()
 {
-    
-    char que[10][20] = {
-        "1-LEITE",
-        "2-GELO",
-        "3-MANTEIGA",
-        "4-OVOS",
-        "5-QUEIJO",
-        "6-SORVETE",
-        "7-BALAS",
-        "8-JARRA",
-        "9-GATO",
-        "10-SUCO"
+    int mv = 0, que = 0, resp[10], cer = 0, err = 0, form[10];
+    char nav[5];
+    char *cores[] = {
+        "\033[31m", // Vermelho
+        "\033[32m", // Verde
+        "\033[33m", // Amarelo
+        "\033[34m"  // Azul
     };
-    for (int i = 0; i < 10; i++)
+    int gab[10] = {1, 1, 4, 3, 2, 4, 1, 1, 4, 3};
+    puts("Utilize o livro para visualizar as questoes!\n");
+    while (1)
     {
-        printf("%s ", que[i]);
+        system("clear");
+        printf("\033[1;33mNa cozinha: Questão %d\033[m\n\n", que + 1);
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == mv)
+                printf(" > \033[%s\u2588\u2588\033[m < ", cores[i]); // destaque reverso
+            else
+                printf(" \033[%s\u2588\u2588\033[m ", cores[i]); // normal
+        }
+        puts("");
+        fgets(nav, 5, stdin);
+        if (strcmp(nav, "w\n") == 0)
+        {
+            mv--;
+            if (mv < 0)
+                mv = 3;
+        }
+        else if (strcmp(nav, "s\n") == 0)
+        {
+            mv++;
+            if (mv > 3)
+                mv = 0;
+        }
+        else if (strcmp(nav, "\n") == 0)
+        {
+            resp[que] = mv + 1;
+            que += 1;
+        }
+        if (que == 10)
+        {
+            break;
+        }
+    }
+
+    // verificação das respostas
+    for (int j = 0; j < 10; j++)
+    {
+        if (resp[j] == gab[j])
+        {
+            cer += 1;
+            form[j] = 1;
+        }
+        else
+        {
+            err += 1;
+            form[j] = 0;
+        }
+    }
+    // imprimir respostas
+    for (int j = 0; j < 10; j++)
+    {
+        if (form[j] == 1)
+            printf("\033[32m%d \033[m", resp[j]);
+        else
+            printf("\033[31m%d \033[m", resp[j]);
     }
     puts("");
+    // imprimir gabarito
+    for (int j = 0; j < 10; j++)
+    {
+        printf("\033[32m%d \033[m", gab[j]);
+    }
+    puts("\n");
+    printf("\033[32mAcertos: %d \033[31mErros %d\n\033[m", cer, err);
+}
+void menu_inicio()
+{
+    int mv = 0;
+    char nav[5];
+    // opções do menu
+    char *op[] = {
+        "Atividades Programadas Nº 01",
+        "Atividades Programadas Nº 02",
+        "Atividades Programadas Nº 03",
+        "Sair"};
+
+    while (1)
+    {
+        system("clear");
+        puts("\033[1;33mEscolha um livro: [use w/s para navegar enter para confirmar]\033[m\n");
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == mv)
+                printf("\033[7;37m%s\033[m\n", op[i]);
+            else
+                printf("%s\n", op[i]);
+        }
+        fgets(nav, 5, stdin);
+        // getchar(); ^[[A ^[[B
+        if (strcmp(nav, "w\n") == 0)
+        {
+            mv--;
+            if (mv < 0)
+                mv = 2;
+        }
+        else if (strcmp(nav, "s\n") == 0)
+        {
+            mv++;
+            if (mv > 2)
+                mv = 0;
+        }
+        else if (strcmp(nav, "\n") == 0)
+        {
+            break;
+        }
+    }
+    switch (mv)
+    {
+    case 0:
+        livro1();
+        break;
+    case 1:
+        /* code */
+        break;
+    case 2:
+        /* code */
+        break;
+
+    default:
+        break;
+    }
 }
 
-void ler()
-{
-}
 int main()
 {
-    livro1();
-    cabeca();
-    livros();
+    char op;
+    menu_livro();
+    do
+    {
+        puts("Deseja jogar novamente? [s/n]");
+        scanf(" %c", &op);
+        if(op == 's'){
+            system("clear");
+            menu_livro();
+        }
+    } while (op != 'n');
+    system("clear");
 }
