@@ -1,14 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ncurses.h>
+// #include <ncurses.h>
+#include <unistd.h>
+#include <termios.h>
 
 #define tit 30
+struct termios original;
+
+void desativarModoCanonico()
+{
+    struct termios novo;
+    tcgetattr(STDIN_FILENO, &original);
+    novo = original;
+    novo.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &novo);
+}
+
+void restaurarModoCanonico()
+{
+    tcsetattr(STDIN_FILENO, TCSANOW, &original);
+}
 
 void livro1()
 {
     int mv = 0, que = 0, resp[10], cer = 0, err = 0, form[10];
-    char nav[5];
+    char nav;
     char *cores[] = {
         "\033[31m", // Vermelho
         "\033[32m", // Verde
@@ -16,11 +33,12 @@ void livro1()
         "\033[34m"  // Azul
     };
     int gab[10] = {1, 1, 4, 3, 2, 4, 1, 1, 4, 3};
+
     puts("Utilize o livro para visualizar as questoes!\n");
     while (1)
     {
         system("clear");
-        printf("\033[1;33mNa cozinha: Questão %d\033[m\n\n", que + 1);
+        printf("\033[1;33mNa cozinha: Questão %d [a/d para mover]\033[m\n\n", que + 1);
         for (int i = 0; i < 4; i++)
         {
             if (i == mv)
@@ -29,20 +47,21 @@ void livro1()
                 printf(" \033[%s\u2588\u2588\033[m ", cores[i]); // normal
         }
         puts("");
-        fgets(nav, 5, stdin);
-        if (strcmp(nav, "w\n") == 0)
+
+        nav = getchar();
+        if (nav == 'a')
         {
             mv--;
             if (mv < 0)
                 mv = 3;
         }
-        else if (strcmp(nav, "s\n") == 0)
+        else if (nav == 'd')
         {
             mv++;
             if (mv > 3)
                 mv = 0;
         }
-        else if (strcmp(nav, "\n") == 0)
+        else if (nav == '\n')
         {
             resp[que] = mv + 1;
             que += 1;
@@ -84,10 +103,10 @@ void livro1()
     puts("\n");
     printf("\033[32mAcertos: %d \033[31mErros %d\n\033[m", cer, err);
 }
-void menu_inicio()
+void menu_livro()
 {
     int mv = 0;
-    char nav[5];
+    char nav;
     // opções do menu
     char *op[] = {
         "Atividades Programadas Nº 01",
@@ -106,21 +125,21 @@ void menu_inicio()
             else
                 printf("%s\n", op[i]);
         }
-        fgets(nav, 5, stdin);
-        // getchar(); ^[[A ^[[B
-        if (strcmp(nav, "w\n") == 0)
+
+        nav = getchar();
+        if (nav == 'w')
         {
             mv--;
             if (mv < 0)
                 mv = 2;
         }
-        else if (strcmp(nav, "s\n") == 0)
+        else if (nav == 's')
         {
             mv++;
             if (mv > 2)
                 mv = 0;
         }
-        else if (strcmp(nav, "\n") == 0)
+        else if (nav == '\n')
         {
             break;
         }
@@ -144,16 +163,8 @@ void menu_inicio()
 
 int main()
 {
-    char op;
-    menu_livro();
-    do
-    {
-        puts("Deseja jogar novamente? [s/n]");
-        scanf(" %c", &op);
-        if(op == 's'){
-            system("clear");
-            menu_livro();
-        }
-    } while (op != 'n');
-    system("clear");
+    desativarModoCanonico(); // Ativa modo de leitura direta do teclado
+    menu_livro();            // Executa o menu
+    restaurarModoCanonico(); // Restaura terminal ao final
+    return 0;
 }
