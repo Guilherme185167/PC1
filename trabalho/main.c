@@ -47,7 +47,7 @@ void livros(int n, int gabarito[10])
         for (int i = 0; i < 4; i++)
         {
             if (i == mv)
-                printf("\t\a|| \033[%s\u2588\u2588\033[m ||\t", cores[i]); // destaque reverso
+                printf("\t\a|| [%s\u2588\u2588\033[m ||\t", cores[i]); // destaque reverso
             else
                 printf(" \t\a\033[%s\u2588\u2588\033[m\t ", cores[i]); // normal
         }
@@ -71,7 +71,8 @@ void livros(int n, int gabarito[10])
             resp[que] = mv + 1;
             que += 1;
         }
-        else if(nav == 'q'){
+        else if (nav == 'q')
+        {
             menu_livro();
         }
         if (que == 10)
@@ -117,10 +118,10 @@ void menu_livro()
     char nav;
     // opções do menu
     char *op[] = {
-        "\t\t\t\aAtividades Programadas Nº 01",
-        "\t\t\t\aAtividades Programadas Nº 02",
-        "\t\t\t\aAtividades Programadas Nº 03",
-        "\t\t\t\a::Sair"};
+        "\aAtividades Programadas Nº 01",
+        "\aAtividades Programadas Nº 02",
+        "\aAtividades Programadas Nº 03",
+        "\a::Sair"};
 
     while (1)
     {
@@ -155,7 +156,7 @@ void menu_livro()
     {
     case 0:
     {
-        
+
         int gab1[10] = {1, 1, 4, 3, 2, 4, 1, 1, 4, 3};
         livros(0, gab1);
         break;
@@ -186,10 +187,10 @@ void menu_principal()
     char nav;
     // opções do menu
     char *op[] = {
-        "\t\t\t\aEquações Matematicas",
-        "\t\t\t\aLivros",
-        "\t\t\t\aGabritos",
-        "\t\t\t\a::Sair"};
+        "\aEquações Matematicas",
+        "\aLivros",
+        "\aGabritos",
+        "\a::Sair"};
 
     while (1)
     {
@@ -233,7 +234,7 @@ void menu_principal()
         break;
     case 3:
         break;
-    
+
     default:
         break;
     }

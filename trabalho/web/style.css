@@ -1,64 +1,94 @@
-body{
-    background-color: black;
+body {
+    background-color: #021526;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
 }
-#main{
+
+#main {
+    position: relative;
+    z-index: 10;
     flex-direction: column;
     display: flex;
     border-radius: 15px;
     /* justify-content: center; */
     align-items: center;
-    background-color: rgb(87, 85, 85);
-    width: 800px;
-    height: 1300px;
-    margin: 0 auto;
+    background-color: #03346E;
+    width: 1240px;
+    height: 940px;
+    /* margin: 0 auto; */
     gap: 10px;
 }
-.questoes{
-    gap: 30px;
+
+.questoes {
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    width: 780px;
-    height: 200px;
+    width: 1000px;
+    gap: 70px;
+    height: 160px;
     border-radius: 15px;
-    background-color: blueviolet;
+    background-color: #6eacda;
+    transition: left 0.4s ease;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
-#titulo{
+
+.pagina {
+    display: flex;
+    flex-direction: column;
+}
+
+#titulo {
     font-size: 50px;
     font-family: 'Courier New', Courier, monospace;
 }
-.im{
+
+.im {
     border-radius: 15px;
-    margin: 30px;
+    margin: 5px;
     width: 160px;
-    height: 160px;
+    height: 140px;
 }
-.alter{
+
+.alter {
     flex-direction: column;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(44, 126, 126);
-    width: 500px;
-    height: 160px;
+    background-color: #27548A;
+    width: 660px;
+    height: 140px;
 }
-.opcao{
-display: flex;
-flex-direction: row;
-gap: 60px;
-}
-.opc{
 
+.opcao {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    gap: 65px;
 }
-.cores{
-    gap: 10px;
+
+.cores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 85px;
 }
-.cor{
-    width: 35px;
-    height: 35px;
+
+#more {
+    display: none;
+    position: absolute;
+    z-index: 50;
+    width: 280px;
+    height: 1000px;
+    right: 65px;
+    background-color: #27548A;
 }

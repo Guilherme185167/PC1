@@ -9,52 +9,245 @@
 </head>
 
 <body>
+    <!-- * div principal -->
+    <button onclick="trocar()" style="width: 30px; height: 30px;"></button>
     <div id="main">
         <div id="titulo">HARDWARE</div>
-        <div class="questoes">
-            <img src="https://cdn.awsli.com.br/600x450/1867/1867451/produto/313396970/images--10---29--nqc0sn9qh2.jpeg" alt="" class="im" id="im1">
-            <div class="alter">
-                <div class="opcao">
-                    <h4 class="ops">RAM</h4>
-                    <h4 class="ops">MOUSE</h4>
-                    <h4 class="ops">PLUTO</h4>
-                    <h4 class="ops">ARDUINO</h4>
-                </div>
-                <div class="cores">
-                    <img src="https://cdn.awsli.com.br/2500x2500/549/549871/produto/29153219/55743cf91c.jpg" alt="" class="cor">
-                    <img src="https://cdn.awsli.com.br/2500x2500/549/549871/produto/29153219/55743cf91c.jpg" alt="" class="cor">
-                    <img src="https://cdn.awsli.com.br/2500x2500/549/549871/produto/29153219/55743cf91c.jpg" alt="" class="cor">
-                    <img src="https://cdn.awsli.com.br/2500x2500/549/549871/produto/29153219/55743cf91c.jpg" alt="" class="cor">
+        <!-- ? PAGINA 1 -->
+        <div id="p1" class="pagina">
+            <!-- ! div PSU -->
+            <div id="psu" class="questoes" onclick="cor('psu','psucor')">
+                <img src="./img/psu.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4 class="ops">PSU</h4>
+                        <h4 class="ops">FONTE</h4>
+                        <h4 class="ops">RAM</h4>
+                        <h4 class="ops">ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div id="psucor" class="opc"
+                            style="width: 30px;height: 30px;background-color: red;border-radius: 5px;"></div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="questoes">
-            <img src="https://cdn.awsli.com.br/600x450/1867/1867451/produto/313396970/images--10---29--nqc0sn9qh2.jpeg" alt="" class="im" id="im1">
-            <div class="alter"></div>
-        </div>
-        <div class="questoes">
-            <img src="https://cdn.awsli.com.br/600x450/1867/1867451/produto/313396970/images--10---29--nqc0sn9qh2.jpeg" alt="" class="im" id="im1">
-            <div class="alter">
-                <div>BB</div>
-                <div>AA</div>
-            </div>
-        </div>
-        <div class="questoes">
-            <img src="https://cdn.awsli.com.br/600x450/1867/1867451/produto/313396970/images--10---29--nqc0sn9qh2.jpeg" alt="" class="im" id="im1">
-            <div class="alter"></div>
-        </div>
-        <div class="questoes">
-            <img src="https://cdn.awsli.com.br/600x450/1867/1867451/produto/313396970/images--10---29--nqc0sn9qh2.jpeg" alt="" class="im" id="im1">
-            <div class="alter"></div>
-        </div>
-        <div class="questoes">
-            <img src="https://cdn.awsli.com.br/600x450/1867/1867451/produto/313396970/images--10---29--nqc0sn9qh2.jpeg" alt="" class="im" id="im1">
-            <div class="alter"></div>
-        </div>
-    
-    </div>
 
-    <script src="script.js"></script>
+            <!-- !div PLACA_REDE -->
+            <div id="lan" class="questoes" onclick="cor('lan','lancor')">
+                <img src="./img/lan.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>RAM</h4>
+                        <h4>ROM</h4>
+                        <h4>LAN</h4>
+                        <h4>ZOIO</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div id="lancor" class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- !div GPU -->
+            <div id="gpu" class="questoes" onclick="cor('gpu','gpucor')">
+                <img src="./img/gpu.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>CPU</h4>
+                        <h4>PSU</h4>
+                        <h4>SSD</h4>
+                        <h4>GPU</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div id="gpucor" class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- !div CPU -->
+            <div id="cpu" class="questoes" onclick="cor('cpu','cpucor')">
+                <img src="./img/cpu.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>ESP32</h4>
+                        <h4>REM</h4>
+                        <h4>CPU</h4>
+                        <h4>COMPILADOR</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div id="cpucor" class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- !div COOLER -->
+            <div class="questoes">
+                <img src="./img/cooler.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>RAM</h4>
+                        <h4>ROM</h4>
+                        <h4>MOD</h4>
+                        <h4>ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ?PAGINA 2 -->
+        <div id="p2" class="pagina" style="display: none;">
+
+            <!-- ! div RAM -->
+            <div id="ram" class="questoes" onclick="cor('ram')">
+                <img src="./img/ram.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4 class="ops">RAM</h4>
+                        <h4 class="ops">ROM</h4>
+                        <h4 class="ops">MOD</h4>
+                        <h4 class="ops">ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div id="rc" class="opc"
+                            style="width: 30px;height: 30px;background-color: red;border-radius: 5px;"></div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- !div PLACA_MAE -->
+            <div class="questoes">
+                <img src="./img/placamae.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>RAM</h4>
+                        <h4>ROM</h4>
+                        <h4>MOD</h4>
+                        <h4>ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- !div SSD -->
+            <div class="questoes">
+                <img src="./img/ssd.png" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>RAM</h4>
+                        <h4>ROM</h4>
+                        <h4>MOD</h4>
+                        <h4>ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- !div HD -->
+            <div class="questoes">
+                <img src="./img/hd.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>RAM</h4>
+                        <h4>ROM</h4>
+                        <h4>MOD</h4>
+                        <h4>ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- !div ZOIO -->
+            <div class="questoes">
+                <img src="./img/zoio.jpeg" alt="" class="im" id="im1">
+                <div class="alter">
+                    <div class="opcao">
+                        <h4>RAM</h4>
+                        <h4>ROM</h4>
+                        <h4>MOD</h4>
+                        <h4>ARDUINO</h4>
+                    </div>
+                    <div class="cores">
+                        <div class="opc" style="width: 30px;height: 30px;background-color: red;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: yellow;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: blue;border-radius: 5px;">
+                        </div>
+                        <div class="opc" style="width: 30px;height: 30px;background-color: green;border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
 </body>
 
 </html>
