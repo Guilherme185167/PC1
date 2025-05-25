@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #05050f;
+            min-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            background-image: url(./colors/pexels-umkreisel-app-956981.jpg);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-origin: border-box;
+            background-clip: border-box;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(9, 8, 10, 0.699);
+            z-index: -1;
+        }
+
+
+        main {
+            position: absolute;
+            /* right: 10%; */
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.404);
+            background: linear-gradient(45deg, rgba(7, 11, 61, 0.26), rgba(0, 140, 255, 0.301),rgba(140, 0, 255, 0.185));
+            width: 90%;
+            max-width: 1180px;
+            min-height: 740px;
+            border-radius: 16px;
+            padding: 70px 0;
+            gap: 50px;
+            box-shadow: 0 0 30px rgba(134, 132, 240, 0.568);
+            /* margin: 20px 0; */
+        }
+
+        /* * {
+            border: 1px solid red;
+        } */
+
+        #img {
+            position: relative;
+            z-index: 1;
+            width: 1000px;
+            height: 420px;
+            border-radius: 8px;
+            background-color: rgba(240, 248, 255, 0.24);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .opc {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+            width: 1000px;
+            height: 300px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.13);
+        }
+
+        .mov {
+            z-index: 10;
+            width: 100px;
+            height: 320px;
+            border-radius: 16px;
+            border: none;
+            background-color: rgba(211, 214, 214, 0.596);
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mov:hover {
+            cursor: pointer;
+            background-color: rgba(9, 53, 196, 0.356);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(75, 9, 129, 0.5);
+        }
+
+        .mov:active {
+            transform: scale(0.98);
+        }
+
+        .disp {
+            margin: 170px;
+            border-radius: 16px;
+            z-index: 5;
+            width: 420px;
+            height: 420px;
+        }
+
+        #ops {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            /* gap: 140px; */
+            color: white;
+            font-size: 24px;
+            font-family: 'Courier New', Courier, monospace;
+            z-index: 4;
+            width: 900px;
+            height: 70px;
+        }
+
+        #cores {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+            position: relative;
+            z-index: 4;
+            width: 900px;
+            height: 100px;
+        }
+
+        .alter {
+            margin-left: 60px;
+            margin-right: 60px;
+        }
+    </style>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <h1 style="color: aliceblue;position: relative;bottom: 420px;">HARWARE: cod:31</h1>
+    <!-- <div style="width: 400px;position: relative;right: 200px;z-index: 100;"></div> -->
+    <main>
+        <div id="img">
+            <button id="ant" class="mov"><span class="material-symbols-outlined">arrow_back_ios</span></button>
+            <img class="disp" src="./img/psu.jpeg">
+            <button id="prox" class="mov"><span class="material-symbols-outlined">arrow_forward_ios</span></button>
+        </div>
+        <div class="opc">
+            <div id="ops">
+                <h3 class="alter" id="op1" style="color: red;">aaa</h3>
+                <h3 class="alter" id="op2" style="color: yellow;">aaa</h3>
+                <h3 class="alter" id="op3" style="color: rgb(0, 119, 255);">aaa</h3>
+                <h3 class="alter" id="op4" style="color: green  ;">aaa</h3>
+            </div>
+            <div id="cores">
+                <div style="width: 100px; height: 100px; background-color: red; border-radius: 16px;"></div>
+                <div style="width: 100px; height: 100px; background-color: yellow; border-radius: 16px;"></div>
+                <div style="width: 100px; height: 100px; background-color: rgb(0, 119, 255); border-radius: 16px;"></div>
+                <div style="width: 100px; height: 100px; background-color: green; border-radius: 16px;"></div>
+            </div>
+        </div>
+    </main>
+
+   <script>
+    // Dados fixos e organizados
+    const quizData = [
+        { // Item 0 - cooler
+            img: './img/cooler.jpeg',
+            correct: 'cooler',
+            options: ['cooler', 'fonte', 'ventoinha', 'watercooler'],
+            correctPosition: 0 // gab1[0] = 1 → posição 0 (op1)
+        },
+        { // Item 1 - cpu
+            img: './img/cpu.jpeg',
+            correct: 'cpu',
+            options: ['cpu', 'teclado', 'mouse', 'monitor'],
+            correctPosition: 0 // gab1[1] = 1 → posição 0 (op1)
+        },
+        { // Item 2 - gpu
+            img: './img/gpu.jpeg',
+            correct: 'gpu',
+            options: ['placa_de_video', 'processador', 'headset', 'gpu'], // gab1[2] = 4 → posição 3
+            correctPosition: 3
+        },
+        { // Item 3 - hd
+            img: './img/hd.jpeg',
+            correct: 'hd',
+            options: ['disco_rigido', 'ssd', 'hd', 'ssdm2'], // gab1[3] = 3 → posição 2
+            correctPosition: 2
+        },
+        { // Item 4 - lan
+            img: './img/lan.jpeg',
+            correct: 'lan',
+            options: ['placa_de_rede', 'lan', 'fonte_atx', 'ventilador'], // gab1[4] = 2 → posição 1
+            correctPosition: 1
+        },
+        { // Item 5 - zoio
+            img: './img/zoio.jpeg',
+            correct: 'zoio',
+            options: ['placa_de_som', 'ledrgb', 'gabinete', 'hardware'], // gab1[5] = 4 → posição 3
+            correctPosition: 3
+        },
+        { // Item 6 - placamae
+            img: './img/placamae.jpeg',
+            correct: 'placamae',
+            options: ['placamae', 'ram', 'memoria_ram', 'fonte'], // gab1[6] = 1 → posição 0
+            correctPosition: 0
+        },
+        { // Item 7 - psu
+            img: './img/psu.jpeg',
+            correct: 'psu',
+            options: ['psu', 'cooler_processador', 'hd', 'ssd'], // gab1[7] = 1 → posição 0
+            correctPosition: 0
+        },
+        { // Item 8 - ram
+            img: './img/ram.jpeg',
+            correct: 'ram',
+            options: ['cpu', 'gpu', 'placamae', 'ram'], // gab1[8] = 4 → posição 3
+            correctPosition: 3
+        },
+        { // Item 9 - ssd
+            img: './img/ssd.png',
+            correct: 'ssd',
+            options: ['hd', 'ssdm2', 'ssd', 'disco_rigido'], // gab1[9] = 3 → posição 2
+            correctPosition: 2
+        }
+    ];
+
+    let currentIndex = 0;
+    const imgdisp = document.querySelector('.disp');
+    const prox = document.getElementById('prox');
+    const ant = document.getElementById('ant');
+    const opElements = [
+        document.getElementById('op1'),
+        document.getElementById('op2'),
+        document.getElementById('op3'),
+        document.getElementById('op4')
+    ];
+
+    function updateQuiz() {
+        const currentItem = quizData[currentIndex];
+        
+        // Atualiza imagem
+        imgdisp.src = currentItem.img;
+        
+        // Garante que a opção correta está na posição certa
+        const options = [...currentItem.options];
+        const correctOption = options.splice(currentItem.correctPosition, 1)[0];
+        options.splice(currentItem.correctPosition, 0, correctOption);
+        
+        // Atualiza as opções na tela
+        opElements.forEach((element, index) => {
+            element.textContent = options[index];
+        });
+    }
+
+    ant.addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % quizData.length;
+        updateQuiz();
+    });
+
+    prox.addEventListener('click', function() {
+        currentIndex = (currentIndex - 1 + quizData.length) % quizData.length;
+        updateQuiz();
+    });
+
+    // Inicializa
+    updateQuiz();
+</script>
+</body>
+
+</html>
