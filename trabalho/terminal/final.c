@@ -9,15 +9,38 @@
 char hora_atual[50];
 char nome[30];
 
+void livros();
+void lista();
+
+//* Função para pegar a hora atual da execução do codigo e salvar no pontos.txt
 void pegar_hora()
 {
     time_t agora;
     time(&agora);
     strftime(hora_atual, 50, "[%d/%m/%Y %H:%M:%S]", localtime(&agora));
 }
-void livros();
 
-void lista();
+//* função para evibir o a chamada de saida e guardar os resultados no pontos.txt
+void saida(char hora_atual[], char op[], int v, int f)
+{
+    FILE *arquivo = fopen("pontos.txt", "a");
+    fprintf(arquivo, "| Hora atual: %s |\n| Modo: %29s |\n| Dificuldade: %20d |\n| Acertos: %24d |\n| Erros: %26d |\n\n", hora_atual, op, v, v, f);
+    fclose(arquivo);
+    printf("\t\t\t\t\033[35mVoltando");
+    for (int i = 0; i < 3; i++)
+    {
+        printf(".");
+        fflush(stdout);
+        usleep(50000);
+    }
+    system("clear");
+    printf("\033[m");
+    printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
+    sleep(1);
+    system("clear");
+}
+
+//* função para mostrar o placar
 void placar()
 {
     FILE *arquivo = fopen("pontos.txt", "r");
@@ -45,13 +68,13 @@ void placar()
     getchar();
     system("clear");
 }
+
+//* função soma
 void soma()
 {
     pegar_hora();
-    FILE *arquivo = fopen("pontos.txt", "a");
     srand(time(NULL));
     int n1, n2, res, esc, v = 0, f = 0, lim = 10;
-
     system("clear");
     printf("\t\t\t   BEM VINDO AO MODO SOMA\n");
     sleep(1);
@@ -71,46 +94,36 @@ void soma()
         n1 = rand() % lim + 0;
         n2 = rand() % lim + 0;
         res = n1 + n2;
-
-        system("clear");
-        printf("Dificuldade: %d\nQuanto é %d + %d?\n>> ", v, n1, n2);
-        scanf("%d", &esc);
-        if (esc == 9999)
+        do
         {
-            fprintf(arquivo, "Hora atual: %s Modo: Soma\nDificuldade: %d\nAcertos: %d\nErros: %d\n\n", hora_atual, v, v, f);
-            printf("\t\t\t\t\033[35mVoltando");
-            for (int i = 0; i < 3; i++)
+            system("clear");
+            printf("Dificuldade: %d\nQuanto é %d + %d?\n>> ", v, n1, n2);
+            scanf("%d", &esc);
+            if (esc == 9999)
             {
-                printf(".");
-                fflush(stdout);
-                usleep(500000);
+                saida(hora_atual, "Adição", v, f);
+                return;
             }
-            system("clear");
-            printf("\033[m");
-            printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
-            sleep(1);
-            system("clear");
-            break;
-        }
-
+            else if (esc != res)
+            {
+                printf("Errado!\n");
+                f += 1;
+            }
+            usleep(500000);
+        } while (esc != res);
         if (esc == res)
         {
             v += 1;
-            printf("Correto! %d\n", v);
+            printf("Correto!\n");
         }
-        else if (esc != res)
-        {
-            printf("Errado! %d\n", res);
-            f += 1;
-        }
-        sleep(1);
+        usleep(500000);
     }
-    fclose(arquivo);
 }
+
+//* função subtração
 void sub()
 {
     pegar_hora();
-    FILE *arquivo = fopen("pontos.txt", "a");
     srand(time(NULL));
     int n1, n2, res, esc, v = 0, f = 0, lim = 10;
     system("clear");
@@ -132,45 +145,36 @@ void sub()
         n1 = rand() % lim + 0;
         n2 = rand() % lim + 0;
         res = n1 - n2;
-        system("clear");
-        printf("Dificuldade: %d\nQuanto é %d - %d?\n>> ", v, n1, n2);
-        scanf("%d", &esc);
-        if (esc == 9999)
+        do
         {
-            fprintf(arquivo, "Hora atual: %s Modo: Subtração\nDificuldade: %d\nAcertos: %d\nErros: %d\n\n", hora_atual, v, v, f);
-            printf("\t\t\t\t\033[35mVoltar");
-            for (int i = 0; i < 3; i++)
+            system("clear");
+            printf("Dificuldade: %d\nQuanto é %d - %d?\n>> ", v, n1, n2);
+            scanf("%d", &esc);
+            if (esc == 9999)
             {
-                printf(".");
-                fflush(stdout);
-                usleep(500000);
+                saida(hora_atual, "Subtração", v, f);
+                return;
             }
-            system("clear");
-            printf("\033[m");
-            printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
-            sleep(1);
-            system("clear");
-            break;
-        }
-
+            else if (esc != res)
+            {
+                printf("Errado!\n");
+                f += 1;
+            }
+            usleep(500000);
+        } while (esc != res);
         if (esc == res)
         {
             v += 1;
-            printf("Correto! %d\n", v);
+            printf("Correto!\n");
         }
-        else if (esc != res)
-        {
-            printf("Errado! %d\n", res);
-            f += 1;
-        }
-        sleep(1);
+        usleep(500000);
     }
-    fclose(arquivo);
 }
+
+//* função multiplicação
 void mult()
 {
     pegar_hora();
-    FILE *arquivo = fopen("pontos.txt", "a");
     srand(time(NULL));
     int n1, n2, res, esc, v = 0, f = 0, lim = 10;
     system("clear");
@@ -192,42 +196,33 @@ void mult()
         n1 = rand() % lim + 0;
         n2 = rand() % lim + 0;
         res = n1 * n2;
-
-        system("clear");
-        printf("Dificuldade: %d\nQuanto é %d * %d?\n>> ", v, n1, n2);
-        scanf("%d", &esc);
-        if (esc == 9999)
+        do
         {
-            fprintf(arquivo, "Hora atual: %s Modo: Multiplicação\nDificuldade: %d\nAcertos: %d\nErros: %d\n\n", hora_atual, v, v, f);
-            printf("\t\t\t\t\033[35mVoltar");
-            for (int i = 0; i < 3; i++)
+            system("clear");
+            printf("Dificuldade: %d\nQuanto é %d * %d?\n>> ", v, n1, n2);
+            scanf("%d", &esc);
+            if (esc == 9999)
             {
-                printf(".");
-                fflush(stdout);
-                usleep(500000);
+                saida(hora_atual, "Multiplicação", v, f);
+                return;
             }
-            system("clear");
-            printf("\033[m");
-            printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
-            sleep(1);
-            system("clear");
-            break;
-        }
-
+            else if (esc != res)
+            {
+                printf("Errado!\n");
+                f += 1;
+            }
+            usleep(500000);
+        } while (esc != res);
         if (esc == res)
         {
             v += 1;
-            printf("Correto! %d\n", v);
+            printf("Correto!\n");
         }
-        else if (esc != res)
-        {
-            printf("Errado! %d\n", res);
-            f += 1;
-        }
-        sleep(1);
+        usleep(500000);
     }
-    fclose(arquivo);
 }
+
+//* função divisão
 void divis()
 {
     pegar_hora();
@@ -253,46 +248,37 @@ void divis()
         n1 = rand() % lim + 0;
         n2 = rand() % lim + 0;
         res = n1 / n2;
-
-        system("clear");
-        printf("Dificuldade: %d\nQuanto é %d / %d?\n>> ", v, n1, n2);
-        scanf("%d", &esc);
-        if (esc == 9999)
+        do
         {
-            fprintf(arquivo, "Hora atual: %s Modo: Divisão\nDificuldade: %d\nAcertos: %d\nErros: %d\n\n", hora_atual, v, v, f);
-            printf("\t\t\t\t\033[35mVoltando");
-            for (int i = 0; i < 3; i++)
+            system("clear");
+            printf("Dificuldade: %d\nQuanto é %d * %d?\n>> ", v, n1, n2);
+            scanf("%d", &esc);
+            if (esc == 9999)
             {
-                printf(".");
-                fflush(stdout);
-                usleep(500000);
+                saida(hora_atual, "Divisão", v, f);
+                return;
             }
-            system("clear");
-            printf("\033[m");
-            printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
-            sleep(1);
-            system("clear");
-            break;
-        }
-
+            else if (esc != res)
+            {
+                printf("Errado!\n");
+                f += 1;
+            }
+            usleep(500000);
+        } while (esc != res);
         if (esc == res)
         {
             v += 1;
-            printf("Correto! %d\n", v);
+            printf("Correto!\n");
         }
-        else if (esc != res)
-        {
-            printf("Errado! %d\n", res);
-            f += 1;
-        }
-        sleep(1);
+        usleep(500000);
     }
     fclose(arquivo);
 }
+
+//* função de equações
 void equee()
 {
     pegar_hora();
-    FILE *arquivo = fopen("pontos.txt", "a");
     system("clear");
     printf("\t\t\t   BEM VINDO AO MODO EQUAÇÃO\n");
     sleep(1);
@@ -323,25 +309,25 @@ void equee()
 
         system("clear");
 
-        // Gerar equação aleatória
+        //! Gerar equação aleatória
         int qtd_numeros = rand() % 3 + 2; // 2 a 4 números
         int numeros[qtd_numeros];
         char operadores[qtd_numeros - 1];
 
-        // Preenche números
+        // *Preenche números
         for (int i = 0; i < qtd_numeros; i++)
         {
             numeros[i] = rand() % max + min;
         }
 
-        // Operadores
+        // *Operadores
         char ops[] = {'+', '-', '*', '/'};
         for (int i = 0; i < qtd_numeros - 1; i++)
         {
             operadores[i] = ops[rand() % 4];
         }
 
-        // Mostrar equação
+        //*Mostrar equação
         printf("Dificuldade: %d\nResolva: ", dificuldade);
         for (int i = 0; i < qtd_numeros; i++)
         {
@@ -353,7 +339,7 @@ void equee()
         }
         printf("\n");
 
-        // Calcular o resultado correto
+        //* Calcular o resultado correto
         int resultado = numeros[0];
 
         // resolver * , /
@@ -387,40 +373,35 @@ void equee()
         }
 
         // Resposta do usuário
-        printf("Sua resposta: ");
-        scanf("%d", &resposta_usuario);
+        do
+        {
+            printf("Sua resposta: ");
+            scanf("%d", &resposta_usuario);
 
-        if (resposta_usuario == 9999)
-        {
-            fprintf(arquivo, "Hora atual: %s Modo: Equação\nDificuldade: %d\nAcertos: %d\nErros: %d\n\n", hora_atual, dificuldade, v, f);
-            printf("\t\t\t\t\033[35mVoltando");
-            for (int i = 0; i < 3; i++)
+            if (resposta_usuario == 9999)
             {
-                printf(".");
-                fflush(stdout);
-                usleep(500000);
+                saida(hora_atual, "Equação", v, f);
+                return;
             }
-            system("clear");
-            printf("\033[m");
-            printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
-            sleep(1);
-            system("clear");
-            break;
-        }
-        else if (resposta_usuario == resultado)
+            else if (resposta_usuario != resultado)
+            {
+                printf("Errado!\n");
+                f += 1;
+            }
+            usleep(500000);
+        } while (resposta_usuario != resultado);
+        
+        if (resposta_usuario == resultado)
         {
-            printf("Correto!\n");
-            dificuldade += 1;
             v += 1;
+            dificuldade += 1;
+            printf("Correto!\n");
         }
-        else
-        {
-            printf("Errado! Era: %d\n", resultado);
-            f += 1;
-        }
+        usleep(500000);
     }
-    fclose(arquivo);
 }
+
+//* menu matematico
 void menu_matematica()
 {
     int modo;
@@ -474,6 +455,8 @@ void menu_matematica()
         }
     }
 }
+
+//* menu dos livros
 void menu_livro()
 {
     int lv;
@@ -523,6 +506,8 @@ void menu_livro()
     }
     return;
 }
+
+//* livros de questões
 void livros(int gabarito[10], int a)
 {
     pegar_hora();
@@ -611,7 +596,7 @@ void livros(int gabarito[10], int a)
             printf("\033[31m%d \033[m", resp[j]);
         }
     }
-    fprintf(arquivo,"\n");
+    fprintf(arquivo, "\n");
     puts("");
     // imprimir gabarito
     for (int j = 0; j < 10; j++)
@@ -627,6 +612,8 @@ void livros(int gabarito[10], int a)
     getchar();
     fclose(arquivo);
 }
+
+//* lista de ajuda
 void lista()
 {
     system("clear");
@@ -636,6 +623,8 @@ void lista()
     getchar();
     system("clear");
 }
+
+//* menu_principal
 void menu_principal()
 {
     char mensagem[] = "\t\t\tBEM VINDO AO PENSE MAIS OU MENOS";
@@ -645,7 +634,7 @@ void menu_principal()
     {
         printf("%c", mensagem[i]);
         fflush(stdout);
-        usleep(40000);
+        usleep(10000);
     }
     system("clear");
     for (int i = 0; i < 7; i++)
@@ -653,10 +642,8 @@ void menu_principal()
         system("clear");
         printf("\033[7;3%dm%s\033[m", i, mensagem);
         fflush(stdout);
-        usleep(300000);
+        usleep(100000);
     }
-    printf("\n\t\t\t\t    \033[7;36m : %s\033[m", nome);
-    sleep(2);
     system("clear");
     while (1)
     {
@@ -702,13 +689,15 @@ void menu_principal()
         }
     }
 }
+
+//* Função principal
 int main()
 {
     FILE *arquivo = fopen("pontos.txt", "a");
     system("clear");
     printf("NOME: ");
     fgets(nome, 30, stdin);
-    fprintf(arquivo, "\nNome: %s", nome);
+    fprintf(arquivo, "| ===============NOME============== |\n< %s", nome);
     fclose(arquivo);
     system("clear");
     menu_principal();
