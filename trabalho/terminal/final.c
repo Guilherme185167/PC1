@@ -20,7 +20,7 @@ void pegar_hora()
     strftime(hora_atual, 50, "[%d/%m/%Y %H:%M:%S]", localtime(&agora));
 }
 
-//* função para evibir o a chamada de saida e guardar os resultados no pontos.txt
+//* função para exibir o a chamada de saida e guardar os resultados no pontos.txt
 void saida(char hora_atual[], char op[], int v, int f)
 {
     FILE *arquivo = fopen("pontos.txt", "a");
@@ -245,8 +245,8 @@ void divis()
                 lim = 120;
         }
 
-        n1 = rand() % lim + 0;
-        n2 = rand() % lim + 0;
+        n1 = rand() % lim + 1;
+        n2 = rand() % lim + 1;
         res = n1 / n2;
         do
         {
@@ -287,8 +287,8 @@ void equee()
     sleep(1);
     system("clear");
     srand(time(NULL));
-    int resposta_usuario, dificuldade = 0, min = 0, max = 10, v = 0, f = 0;
-
+    int dificuldade = 0, min = 0, max = 10, v = 0, f = 0;
+    float resposta_usuario; 
     while (1)
     {
         if (dificuldade > 5)
@@ -310,11 +310,11 @@ void equee()
         system("clear");
 
         //! Gerar equação aleatória
-        int qtd_numeros = rand() % 3 + 2; // 2 a 4 números
+        int qtd_numeros = rand() % 3 + 2; 
         int numeros[qtd_numeros];
         char operadores[qtd_numeros - 1];
 
-        // *Preenche números
+        //? Preenche números
         for (int i = 0; i < qtd_numeros; i++)
         {
             numeros[i] = rand() % max + min;
@@ -359,7 +359,7 @@ void equee()
             }
         }
 
-        // resolver + , -
+        //* resolver + , -
         for (int i = 1; i < qtd_numeros; i++)
         {
             if (operadores[i - 1] == '+')
@@ -372,12 +372,23 @@ void equee()
             }
         }
 
-        // Resposta do usuário
+        //* Resposta do usuário
         do
         {
+            system("clear");
+            printf("Dificuldade: %d\nResolva: ", dificuldade);
+            for (int i = 0; i < qtd_numeros; i++)
+            {
+                printf("%d", numeros[i]);
+                if (i < qtd_numeros - 1)
+                {
+                    printf(" %c ", operadores[i]);
+                }
+            }
+            printf("\n");
             printf("Sua resposta: ");
-            scanf("%d", &resposta_usuario);
-
+            scanf("%f", &resposta_usuario);
+            
             if (resposta_usuario == 9999)
             {
                 saida(hora_atual, "Equação", v, f);
@@ -398,6 +409,7 @@ void equee()
             printf("Correto!\n");
         }
         usleep(500000);
+        system("clear");
     }
 }
 
@@ -560,6 +572,7 @@ void livros(int gabarito[10], int a)
         }
         else if (nav == 'q')
         {
+            saida(hora_atual,"Livro",cer,err);
             return;
         }
         if (que == 10)
@@ -582,7 +595,8 @@ void livros(int gabarito[10], int a)
         }
     }
     fprintf(arquivo, "Nome: %s\nData: %s\n", nome, hora_atual);
-    // imprimir respostas
+
+    //* imprimir respostas
     for (int j = 0; j < 10; j++)
     {
         if (form[j] == 1)
@@ -598,7 +612,8 @@ void livros(int gabarito[10], int a)
     }
     fprintf(arquivo, "\n");
     puts("");
-    // imprimir gabarito
+
+    //* imprimir gabarito
     for (int j = 0; j < 10; j++)
     {
         fprintf(arquivo, "%d ", gabarito[j]);
