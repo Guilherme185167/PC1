@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            height: 100vh;
+            flex-direction: column;
+            background: linear-gradient(180deg, rgb(0, 6, 37),rgba(5, 11, 61, 0.945),rgb(0, 8, 41));
+            margin: 0px none;
+            font-family: Courier New, 'Courier', monospace;
+        }
+
+        #main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 2%;
+            font-size: 30px;
+            width: 90%;
+            height: 75%;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.308);
+            background-color: rgba(177, 177, 177, 0.336);
+        }
+
+        #imagem {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 85%;
+            height: 30%;
+            position: relative;
+            gap: 15px;
+        }
+
+        #opc {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10%;
+            width: 85%;
+            height: 55%;
+            color: white;
+        }
+
+        .nav {
+            border-radius: 15px;
+            color: white;
+            font-size: 50px;
+            z-index: 10;
+            position: relative;
+            height: 100%;
+            width: 12%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.281);
+        }
+        .nav:hover{
+            background-color: rgba(241, 241, 241, 0.5);
+        }
+
+        #disp {
+            z-index: 1;
+            position: relative;
+            height: 100%;
+            width: 70%;
+            border-radius: 15px;
+        }
+
+        .nome {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: rgb(235, 235, 235);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="font-size: 60px;">LIVRO: HARDWARE 31</h1>
+    <div id="main">
+        <p id="ts" style="font-size: 40px;" >Questão 1</p>
+        <div id="imagem">
+            <button class="nav" id="turn"><<</button>
+            <img id="disp" src="./img/cooler.jpeg">
+            <button class="nav" id="next">>></button>
+        </div>
+        <div id="opc">
+            <div class="nome" id="o1"
+                style="width: 100%;background-color: rgb(218, 218, 4);height: 20%;border-radius: 30px;"></div>
+            <div class="nome" id="o2" style="width: 100%;background-color: red;height: 20%;border-radius: 30px;"></div>
+            <div class="nome" id="o3" style="width: 100%;background-color: blue;height: 20%;border-radius: 30px;"></div>
+            <div class="nome" id="o4" style="width: 100%;background-color: green;height: 20%;border-radius: 30px;">
+            </div>
+        </div>
+    </div>
+    <script>
+        let cont = 1;
+
+        const teste = document.getElementById('ts');
+        const next = document.getElementById('next');
+        const turn = document.getElementById('turn');
+        const disp = document.getElementById('disp');
+        const op1 = document.getElementById('o1');
+        const op2 = document.getElementById('o2');
+        const op3 = document.getElementById('o3');
+        const op4 = document.getElementById('o4');
+
+
+        const imgs = [
+            './img/cooler.jpeg',
+            './img/cpu.jpeg',
+            './img/gpu.jpeg',
+            './img/hd.jpeg',
+            './img/lan.jpeg',
+            './img/placamae.jpeg',
+            './img/psu.jpeg',
+            './img/ram.jpeg',
+            './img/ssd.png',
+            './img/zoio.jpeg'
+        ];
+
+        // Listas reorganizadas para corresponder ao gabarito {1, 2, 4, 1, 1, 4, 1, 3, 4, 1}
+        const p1 = [
+            "Cooler",         
+            "Cooler",         
+            "CPU",            
+            "HD",             
+            "Placa de Rede",  
+            "SSD",            
+            "PSU",            
+            "SSD",            
+            "Cooler",          
+            "Hardware"       
+        ];
+
+        const p2 = [
+            "Memória RAM",     
+            "CPU",             
+            "Memória RAM",     
+            "GPU",             
+            "Cooler",          
+            "Placa de Rede",   
+            "HD",              
+            "PSU",             
+            "Placa de Rede",   
+            "GPU"              
+        ];
+
+        const p3 = [
+            "GPU",             
+            "Hardware",       
+            "Placa-Mãe",       
+            "Memória RAM",     
+            "SSD",             
+            "Cooler",          
+            "Cooler",          
+            "Memória RAM",      
+            "Hardware",        
+            "Memória RAM",   
+        ];
+
+        const p4 = [
+            "Placa de Rede",   
+            "GPU",             
+            "GPU",             
+            "Placa de Rede",   
+            "HD",              
+            "Placa-Mãe",       
+            "Placa-Mãe",       
+            "HD",              
+            "SSD",             
+            "Placa-Mãe"        
+        ];
+
+        op1.textContent = p1[0];
+        op2.textContent = p2[0];
+        op3.textContent = p3[0];
+        op4.textContent = p4[0];
+
+        function mudar(pos) {
+            if (pos === 'up') {
+                cont = cont === 10 ? 1 : cont + 1;
+            }
+            else if (pos === 'dn') {
+                cont = cont === 1 ? 10 : cont - 1;
+            }
+            // Ajustando o índice (cont-1 pois arrays começam em 0)
+            const idx = cont - 1;
+            teste.textContent = `Questão ${cont}`;
+            disp.src = imgs[idx];
+            op1.textContent = p1[idx];
+            op2.textContent = p2[idx];
+            op3.textContent = p3[idx];
+            op4.textContent = p4[idx];
+        }
+
+        next.addEventListener('click', () => mudar('up'));
+        turn.addEventListener('click', () => mudar('dn'));
+
+
+    </script>
+</body>
+
+</html>

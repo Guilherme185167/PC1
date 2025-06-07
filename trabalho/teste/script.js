@@ -15,3 +15,15 @@ function trocar() {
     d1.style.display = d1.style.display === "none" ? "block" : "none";
     d2.style.display = d2.style.display === "none" ? "block" : "none";
 }
+
+
+// ./img/blender.png 
+// ./img/cad.png 
+// ./img/docker.png 
+// ./img/figma.png 
+// ./img/node.png 
+// ./img/obs.png 
+// ./img/photoshop.jpeg 
+// ./img/power.jpeg 
+// ./img/rar.jpeg 
+// ./img/vlc.jpeg 

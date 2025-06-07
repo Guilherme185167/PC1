@@ -12,16 +12,3 @@ botao.addEventListener('click', function() {
     document.body.style.backgroundImage = `url('${fundos[atual]}')`;
 });
 
-trabalho
-
-terminal 
-terminal/output 
-terminal/main.c 
-
-web 
-web/colors 
-web/img 
-web/hardware.html 
-web/menu.css 
-web/menu.js 
-web/menulivro.html 
