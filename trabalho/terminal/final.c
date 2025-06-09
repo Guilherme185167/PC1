@@ -14,6 +14,27 @@ char nome[30];
 void livros();
 void lista();
 
+//*Função barra de carregamento
+void barra()
+{
+    system("clear");
+    printf("\033[37mINICIANDO [%25s]\033[m", "");
+    fflush(stdout);
+
+    printf("\033[1;12H");
+    fflush(stdout);
+
+    for (int i = 0; i < 25; i++)
+    {
+        printf("\033[36m%s\033[m", "\u2588");
+        fflush(stdout);
+        usleep(50000);
+    }
+    system("clear");
+    printf("INICIANDO [\033[32m█████████████████████████\033[m]");
+    printf("\033[m\n");
+}
+
 //* Função executar musica
 void music()
 {
@@ -28,7 +49,27 @@ void music()
 //* Função  som sair
 void sai()
 {
-    int resultado = system("./teste");
+    int resultado = system("./sai");
+
+    if (resultado == -1)
+    {
+        printf("Erro ao executar o programa externo!\n");
+    }
+}
+//* Função coin
+void coin()
+{
+    int resultado = system("./ts");
+
+    if (resultado == -1)
+    {
+        printf("Erro ao executar o programa externo!\n");
+    }
+}
+//* Função entra
+void entra()
+{
+    int resultado = system("./entra");
 
     if (resultado == -1)
     {
@@ -141,7 +182,9 @@ void soma()
         if (esc == res)
         {
             v += 1;
-            printf("Correto!\n");
+            printf("\033[32mCorreto!\033[m\n");
+            fflush(stdout);
+            coin();
         }
         usleep(500000);
     }
@@ -192,7 +235,9 @@ void sub()
         if (esc == res)
         {
             v += 1;
-            printf("Correto!\n");
+            printf("\033[32mCorreto!\033[m\n");
+            fflush(stdout);
+            coin();
         }
         usleep(500000);
     }
@@ -244,7 +289,9 @@ void mult()
         if (esc == res)
         {
             v += 1;
-            printf("Correto!\n");
+            printf("\033[32mCorreto!\033[m\n");
+            fflush(stdout);
+            coin();
         }
         usleep(500000);
     }
@@ -297,7 +344,9 @@ void divis()
         if (esc == res)
         {
             v += 1;
-            printf("Correto!\n");
+            printf("\033[32mCorreto!\033[m\n");
+            fflush(stdout);
+            coin();
         }
         usleep(500000);
     }
@@ -435,7 +484,9 @@ void equee()
         {
             v += 1;
             dificuldade += 1;
-            printf("Correto!\n");
+            printf("\033[32mCorreto!\033[m\n");
+            fflush(stdout);
+            coin();
         }
         usleep(500000);
         system("clear");
@@ -745,6 +796,9 @@ int main()
 {
     FILE *arquivo = fopen("pontos.txt", "a");
     system("clear");
+    barra();
+    usleep(50000);
+    entra();
     system("clear");
     printf("NOME: ");
     fgets(nome, 30, stdin);
