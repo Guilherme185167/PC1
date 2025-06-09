@@ -4,6 +4,8 @@
 #include <time.h>
 #include <unistd.h>
 #include <termios.h>
+#include <sys/types.h>
+
 #define tit 30
 
 char hora_atual[50];
@@ -11,6 +13,28 @@ char nome[30];
 
 void livros();
 void lista();
+
+//* Função executar musica
+void music()
+{
+    int resultado = system("./TESTE");
+
+    if (resultado == -1)
+    {
+        printf("Erro ao executar o programa externo!\n");
+    }
+}
+
+//* Função  som sair
+void sai()
+{
+    int resultado = system("./teste");
+
+    if (resultado == -1)
+    {
+        printf("Erro ao executar o programa externo!\n");
+    }
+}
 
 //* Função para pegar a hora atual da execução do codigo e salvar no pontos.txt
 void pegar_hora()
@@ -35,6 +59,7 @@ void saida(char hora_atual[], char op[], int v, int f)
     }
     system("clear");
     printf("\033[m");
+    sai();
     printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
     sleep(1);
     system("clear");
@@ -66,6 +91,7 @@ void placar()
     printf("\n\nPressione ENTER para voltar...");
     getchar();
     getchar();
+    sai();
     system("clear");
 }
 
@@ -101,6 +127,7 @@ void soma()
             scanf("%d", &esc);
             if (esc == 9999)
             {
+
                 saida(hora_atual, "Adição", v, f);
                 return;
             }
@@ -204,6 +231,7 @@ void mult()
             if (esc == 9999)
             {
                 saida(hora_atual, "Multiplicação", v, f);
+
                 return;
             }
             else if (esc != res)
@@ -256,6 +284,7 @@ void divis()
             if (esc == 9999)
             {
                 saida(hora_atual, "Divisão", v, f);
+
                 return;
             }
             else if (esc != res)
@@ -288,7 +317,7 @@ void equee()
     system("clear");
     srand(time(NULL));
     int dificuldade = 0, min = 0, max = 10, v = 0, f = 0;
-    float resposta_usuario; 
+    float resposta_usuario;
     while (1)
     {
         if (dificuldade > 5)
@@ -310,7 +339,7 @@ void equee()
         system("clear");
 
         //! Gerar equação aleatória
-        int qtd_numeros = rand() % 3 + 2; 
+        int qtd_numeros = rand() % 3 + 2;
         int numeros[qtd_numeros];
         char operadores[qtd_numeros - 1];
 
@@ -388,7 +417,7 @@ void equee()
             printf("\n");
             printf("Sua resposta: ");
             scanf("%f", &resposta_usuario);
-            
+
             if (resposta_usuario == 9999)
             {
                 saida(hora_atual, "Equação", v, f);
@@ -401,7 +430,7 @@ void equee()
             }
             usleep(500000);
         } while (resposta_usuario != resultado);
-        
+
         if (resposta_usuario == resultado)
         {
             v += 1;
@@ -455,6 +484,7 @@ void menu_matematica()
             }
             system("clear");
             printf("\033[m");
+            sai();
             printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
             sleep(1);
             system("clear");
@@ -504,6 +534,7 @@ void menu_livro()
             }
             system("clear");
             printf("\033[m");
+            sai();
             printf("\033[32m\t\t\t\t   VOLTE SEMPRE!\033[m\n");
             sleep(1);
             system("clear");
@@ -572,7 +603,7 @@ void livros(int gabarito[10], int a)
         }
         else if (nav == 'q')
         {
-            saida(hora_atual,"Livro",cer,err);
+            saida(hora_atual, "Livro", cer, err);
             return;
         }
         if (que == 10)
@@ -644,6 +675,7 @@ void menu_principal()
 {
     char mensagem[] = "\t\t\tBEM VINDO AO PENSE MAIS OU MENOS";
     int n = strlen(mensagem), atv;
+
     // mensagem de boas vindas
     for (int i = 0; i < n; i++)
     {
@@ -659,6 +691,8 @@ void menu_principal()
         fflush(stdout);
         usleep(100000);
     }
+    //! musica de boas vindas
+    music();
     system("clear");
     while (1)
     {
@@ -677,6 +711,7 @@ void menu_principal()
             }
             system("clear");
             printf("\033[m");
+            sai();
             printf("\033[32m\n\t\t\t\tVOLTE SEMPRE!\033[m\n");
             sleep(1);
             system("clear");
@@ -709,6 +744,7 @@ void menu_principal()
 int main()
 {
     FILE *arquivo = fopen("pontos.txt", "a");
+    system("clear");
     system("clear");
     printf("NOME: ");
     fgets(nome, 30, stdin);

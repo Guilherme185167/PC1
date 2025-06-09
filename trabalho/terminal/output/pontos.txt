@@ -1,13 +1,30 @@
-Nome: Guilherme
-
-Data: [02/06/2025 20:57:19]
-2 3 3 3 3 3 3 3 3 3 
-1 2 4 1 1 4 1 3 4 1 Acertos: 1 Erros 9
 | ===============NOME============== |
-< ggggg
-| Hora atual: [02/06/2025 20:59:52] |
-| Modo:                     Equação |
-| Dificuldade:                    2 |
-| Acertos:                        2 |
-| Erros:                          3 |
+< ggg
+| ===============NOME============== |
+< g
+| ===============NOME============== |
+< h
+| ===============NOME============== |
+< j
+| ===============NOME============== |
+< d
+| ===============NOME============== |
+< g
+| ===============NOME============== |
+< guilherme
+| ===============NOME============== |
+< guilherme
+| Hora atual: [08/06/2025 22:33:56] |
+| Modo:                      Adição |
+| Dificuldade:                    0 |
+| Acertos:                        0 |
+| Erros:                          1 |
+
+| ===============NOME============== |
+< ggg
+| Hora atual: [08/06/2025 22:52:37] |
+| Modo:                      Adição |
+| Dificuldade:                    0 |
+| Acertos:                        0 |
+| Erros:                          0 |
 
