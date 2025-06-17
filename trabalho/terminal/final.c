@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <termios.h>
 #include <sys/types.h>
+#include <math.h>
+#include <ctype.h>
 
 #define tit 30
 
@@ -66,7 +68,7 @@ void coin()
         printf("Erro ao executar o programa externo!\n");
     }
 }
-//* Função entra
+//* Função entrada
 void entra()
 {
     int resultado = system("./entra");
@@ -76,7 +78,6 @@ void entra()
         printf("Erro ao executar o programa externo!\n");
     }
 }
-
 //* Função para pegar a hora atual da execução do codigo e salvar no pontos.txt
 void pegar_hora()
 {
@@ -302,15 +303,20 @@ void divis()
 {
     pegar_hora();
     FILE *arquivo = fopen("pontos.txt", "a");
+    int n1, n2, v = 0, f = 0, lim = 10;
+    float res, esc;
+    char buffer[100];
+    char *endptr;
+
     srand(time(NULL));
-    int n1, n2, res, esc, v = 0, f = 0, lim = 10;
     system("clear");
     printf("\t\t\t   BEM VINDO AO MODO DIVISÃO\n");
     sleep(1);
     system("clear");
-    printf("Digte 9999 para voltar\n");
+    printf("Digite 9999 para voltar\n");
     sleep(1);
     system("clear");
+
     while (1)
     {
         if (v > 10)
@@ -322,176 +328,202 @@ void divis()
 
         n1 = rand() % lim + 1;
         n2 = rand() % lim + 1;
-        res = n1 / n2;
+        while (n2 == 0)
+            n2 = rand() % lim + 1;
+        res = (float)n1 / n2;
+
         do
         {
             system("clear");
-            printf("Dificuldade: %d\nQuanto é %d * %d?\n>> ", v, n1, n2);
-            scanf("%d", &esc);
+            printf("Dificuldade: %d\nQuanto é %d / %d?\n>> ", v, n1, n2);
+
+            // Ler a entrada como string
+            if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+            {
+                printf("Erro na leitura!\n");
+                continue;
+            }
+
+            // Substituir vírgula por ponto
+            for (int i = 0; buffer[i]; i++)
+            {
+                if (buffer[i] == ',')
+                {
+                    buffer[i] = '.';
+                }
+            }
+
+            // Converter para float com verificação
+            esc = strtof(buffer, &endptr);
+
+            // Verificar se a conversão foi bem-sucedida
+            if (endptr == buffer)
+            {
+                printf("Entrada inválida! Use números decimais com ponto ou vírgula.\n");
+                usleep(1000000);
+                continue;
+            }
+
             if (esc == 9999)
             {
-                saida(hora_atual, "Divisão", v, f);
-
                 return;
             }
-            else if (esc != res)
+            else if (fabs(esc - res) > 0.01)
             {
                 printf("Errado!\n");
                 f += 1;
+                usleep(1000000);
             }
-            usleep(500000);
-        } while (esc != res);
-        if (esc == res)
-        {
-            v += 1;
-            printf("\033[32mCorreto!\033[m\n");
-            fflush(stdout);
-            coin();
-        }
-        usleep(500000);
+        } while (fabs(esc - res) > 0.01);
+
+        v += 1;
+        printf("\033[32mCorreto!\033[m\n");
+        fflush(stdout);
+        coin();
+        usleep(300000);
     }
     fclose(arquivo);
 }
 
 //* função de equações
-void equee()
-{
-    pegar_hora();
-    system("clear");
-    printf("\t\t\t   BEM VINDO AO MODO EQUAÇÃO\n");
-    sleep(1);
-    system("clear");
-    printf("Digte 9999 para voltar\n");
-    sleep(1);
-    system("clear");
-    srand(time(NULL));
-    int dificuldade = 0, min = 0, max = 10, v = 0, f = 0;
-    float resposta_usuario;
-    while (1)
-    {
-        if (dificuldade > 5)
-        {
-            max = 50;
-            min = 10;
-            if (dificuldade > 13)
-            {
-                max = 100;
-                min = 35;
-                if (dificuldade > 25)
-                {
-                    max = 100;
-                    min = 0;
-                }
-            }
-        }
+// void equee()
+// {
+//     pegar_hora();
+//     system("clear");
+//     printf("\t\t\t   BEM VINDO AO MODO EQUAÇÃO\n");
+//     sleep(1);
+//     system("clear");
+//     printf("Digte 9999 para voltar\n");
+//     sleep(1);
+//     system("clear");
+//     srand(time(NULL));
+//     int dificuldade = 0, min = 0, max = 10, v = 0, f = 0;
+//     float resposta_usuario;
+//     while (1)
+//     {
+//         if (dificuldade > 5)
+//         {
+//             max = 50;
+//             min = 10;
+//             if (dificuldade > 13)
+//             {
+//                 max = 100;
+//                 min = 35;
+//                 if (dificuldade > 25)
+//                 {
+//                     max = 100;
+//                     min = 0;
+//                 }
+//             }
+//         }
 
-        system("clear");
+//         system("clear");
 
-        //! Gerar equação aleatória
-        int qtd_numeros = rand() % 3 + 2;
-        int numeros[qtd_numeros];
-        char operadores[qtd_numeros - 1];
+//         //! Gerar equação aleatória
+//         int qtd_numeros = rand() % 3 + 2;
+//         int numeros[qtd_numeros];
+//         char operadores[qtd_numeros - 1];
 
-        //? Preenche números
-        for (int i = 0; i < qtd_numeros; i++)
-        {
-            numeros[i] = rand() % max + min;
-        }
+//         //? Preenche números
+//         for (int i = 0; i < qtd_numeros; i++)
+//         {
+//             numeros[i] = rand() % max + min;
+//         }
 
-        // *Operadores
-        char ops[] = {'+', '-', '*', '/'};
-        for (int i = 0; i < qtd_numeros - 1; i++)
-        {
-            operadores[i] = ops[rand() % 4];
-        }
+//         // *Operadores
+//         char ops[] = {'+', '-', '*', '/'};
+//         for (int i = 0; i < qtd_numeros - 1; i++)
+//         {
+//             operadores[i] = ops[rand() % 4];
+//         }
 
-        //*Mostrar equação
-        printf("Dificuldade: %d\nResolva: ", dificuldade);
-        for (int i = 0; i < qtd_numeros; i++)
-        {
-            printf("%d", numeros[i]);
-            if (i < qtd_numeros - 1)
-            {
-                printf(" %c ", operadores[i]);
-            }
-        }
-        printf("\n");
+//         //*Mostrar equação
+//         printf("Dificuldade: %d\nResolva: ", dificuldade);
+//         for (int i = 0; i < qtd_numeros; i++)
+//         {
+//             printf("%d", numeros[i]);
+//             if (i < qtd_numeros - 1)
+//             {
+//                 printf(" %c ", operadores[i]);
+//             }
+//         }
+//         printf("\n");
 
-        //* Calcular o resultado correto
-        int resultado = numeros[0];
+//         //* Calcular o resultado correto
+//         int resultado = numeros[0];
 
-        // resolver * , /
-        for (int i = 1; i < qtd_numeros; i++)
-        {
-            if (operadores[i - 1] == '*')
-            {
-                resultado *= numeros[i];
-            }
-            else if (operadores[i - 1] == '/')
-            {
-                if (numeros[i] == 0)
-                {
-                    numeros[i] = 1;
-                }
-                resultado /= numeros[i];
-            }
-        }
+//         // resolver * , /
+//         for (int i = 1; i < qtd_numeros; i++)
+//         {
+//             if (operadores[i - 1] == '*')
+//             {
+//                 resultado *= numeros[i];
+//             }
+//             else if (operadores[i - 1] == '/')
+//             {
+//                 if (numeros[i] == 0)
+//                 {
+//                     numeros[i] = 1;
+//                 }
+//                 resultado /= numeros[i];
+//             }
+//         }
 
-        //* resolver + , -
-        for (int i = 1; i < qtd_numeros; i++)
-        {
-            if (operadores[i - 1] == '+')
-            {
-                resultado += numeros[i];
-            }
-            else if (operadores[i - 1] == '-')
-            {
-                resultado -= numeros[i];
-            }
-        }
+//         //* resolver + , -
+//         for (int i = 1; i < qtd_numeros; i++)
+//         {
+//             if (operadores[i - 1] == '+')
+//             {
+//                 resultado += numeros[i];
+//             }
+//             else if (operadores[i - 1] == '-')
+//             {
+//                 resultado -= numeros[i];
+//             }
+//         }
 
-        //* Resposta do usuário
-        do
-        {
-            system("clear");
-            printf("Dificuldade: %d\nResolva: ", dificuldade);
-            for (int i = 0; i < qtd_numeros; i++)
-            {
-                printf("%d", numeros[i]);
-                if (i < qtd_numeros - 1)
-                {
-                    printf(" %c ", operadores[i]);
-                }
-            }
-            printf("\n");
-            printf("Sua resposta: ");
-            scanf("%f", &resposta_usuario);
+//         //* Resposta do usuário
+//         do
+//         {
+//             system("clear");
+//             printf("Dificuldade: %d\nResolva: ", dificuldade);
+//             for (int i = 0; i < qtd_numeros; i++)
+//             {
+//                 printf("%d", numeros[i]);
+//                 if (i < qtd_numeros - 1)
+//                 {
+//                     printf(" %c ", operadores[i]);
+//                 }
+//             }
+//             printf("\n");
+//             printf("Sua resposta: ");
+//             scanf("%f", &resposta_usuario);
 
-            if (resposta_usuario == 9999)
-            {
-                saida(hora_atual, "Equação", v, f);
-                return;
-            }
-            else if (resposta_usuario != resultado)
-            {
-                printf("Errado!\n");
-                f += 1;
-            }
-            usleep(500000);
-        } while (resposta_usuario != resultado);
+//             if (resposta_usuario == 9999)
+//             {
+//                 saida(hora_atual, "Equação", v, f);
+//                 return;
+//             }
+//             else if (resposta_usuario != resultado)
+//             {
+//                 printf("Errado!\n");
+//                 f += 1;
+//             }
+//             usleep(500000);
+//         } while (resposta_usuario != resultado);
 
-        if (resposta_usuario == resultado)
-        {
-            v += 1;
-            dificuldade += 1;
-            printf("\033[32mCorreto!\033[m\n");
-            fflush(stdout);
-            coin();
-        }
-        usleep(500000);
-        system("clear");
-    }
-}
+//         if (resposta_usuario == resultado)
+//         {
+//             v += 1;
+//             dificuldade += 1;
+//             printf("\033[32mCorreto!\033[m\n");
+//             fflush(stdout);
+//             coin();
+//         }
+//         usleep(500000);
+//         system("clear");
+//     }
+// }
 
 //* menu matematico
 void menu_matematica()
@@ -519,9 +551,9 @@ void menu_matematica()
         case 44:
             divis();
             break;
-        case 45:
-            equee();
-            break;
+        // case 45:
+        //     equee();
+        //     break;
         case 998:
             lista();
             break;
@@ -714,7 +746,7 @@ void livros(int gabarito[10], int a)
 void lista()
 {
     system("clear");
-    printf("\033[35mComandos principais\033[m\n\033[33m999 - SAIR\n998 - LISTA DE COMANDOS\n997 - PONTUAÇÃO\033[m\n\n\033[35mNavegação\033[m\n\033[33mq - SAIR DA ATIVIDADE(Livros)\n9999 - SAIR DA ATIVIDADE(Matematica)\na - MOVER PARA ESQUERDA\nd - MOVER PARA DIREITA\nSpace - SELECIONAR OPÇÂO\nEnter - CONFIRMAR OPÇÂO\033[m\n\n\033[35mMenus\033[m\n\033[33m1 - MENU DE LIVROS\n2 - MENU DE MATEMATICA\033[m\n\n\033[35mLivros\n\033[33m31 - LIVRO HARDWARE\n32 - LIVRO SOFTWARE\033[m\n\n\033[35mModos matemáticos\033[m\n\033[33m41 - SOMA\n42 - SUBTRAÇÃO\n43 - MUTIPLICAÇÃO\n44 - DIVISÃO\n45 - EQUAÇÕES\033[m");
+    printf("\033[35mComandos principais\033[m\n\033[33m999 - SAIR\n998 - LISTA DE COMANDOS\n997 - PONTUAÇÃO\033[m\n\n\033[35mNavegação\033[m\n\033[33mq - SAIR DA ATIVIDADE(Livros)\n9999 - SAIR DA ATIVIDADE(Matematica)\na - MOVER PARA ESQUERDA\nd - MOVER PARA DIREITA\nSpace - SELECIONAR OPÇÂO\nEnter - CONFIRMAR OPÇÂO\033[m\n\n\033[35mMenus\033[m\n\033[33m1 - MENU DE LIVROS\n2 - MENU DE MATEMATICA\033[m\n\n\033[35mLivros\n\033[33m31 - LIVRO HARDWARE\n32 - LIVRO SOFTWARE\033[m\n\n\033[35mModos matemáticos\033[m\n\033[33m41 - SOMA\n42 - SUBTRAÇÃO\n43 - MUTIPLICAÇÃO\n44 - DIVISÃO\033[m");
     getchar();
     printf("\nTecle enter para continuar...");
     getchar();
