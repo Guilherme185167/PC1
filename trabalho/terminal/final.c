@@ -146,6 +146,7 @@ void soma()
     pegar_hora();
     srand(time(NULL));
     int n1, n2, res, esc, v = 0, f = 0, lim = 10;
+    char input[10];
     system("clear");
     printf("\t\t\t   BEM VINDO AO MODO SOMA\n");
     sleep(1);
@@ -169,7 +170,19 @@ void soma()
         {
             system("clear");
             printf("Dificuldade: %d\nQuanto é %d + %d?\n>> ", v, n1, n2);
-            scanf("%d", &esc);
+             //! le a entrada como string
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("erro na leitura!");
+            continue;
+        }
+        //! converte para inteiro
+        if (sscanf(input, "%d", &esc) != 1)
+        {
+            printf("Codigo invalido, utilize apenas numeros!");
+            sleep(1);
+            continue;
+        }
             if (esc == 9999)
             {
 
@@ -200,6 +213,7 @@ void sub()
     pegar_hora();
     srand(time(NULL));
     int n1, n2, res, esc, v = 0, f = 0, lim = 10;
+    char input[10];
     system("clear");
     printf("\t\t\t   BEM VINDO AO MODO SUBTRAÇÃO\n");
     sleep(1);
@@ -223,7 +237,20 @@ void sub()
         {
             system("clear");
             printf("Dificuldade: %d\nQuanto é %d - %d?\n>> ", v, n1, n2);
-            scanf("%d", &esc);
+             //! le a entrada como string
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("erro na leitura!");
+            continue;
+        }
+        //! converte para inteiro
+        if (sscanf(input, "%d", &esc) != 1)
+        {
+            printf("Codigo invalido, utilize apenas numeros!");
+            sleep(1);
+            continue;
+        }
+        
             if (esc == 9999)
             {
                 saida(hora_atual, "Subtração", v, f);
@@ -253,6 +280,7 @@ void mult()
     pegar_hora();
     srand(time(NULL));
     int n1, n2, res, esc, v = 0, f = 0, lim = 10;
+    char input[10];
     system("clear");
     printf("\t\t\t   BEM VINDO AO MODO MULTIPLICAÇÃO\n");
     sleep(1);
@@ -276,7 +304,20 @@ void mult()
         {
             system("clear");
             printf("Dificuldade: %d\nQuanto é %d * %d?\n>> ", v, n1, n2);
-            scanf("%d", &esc);
+             //! le a entrada como string
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("erro na leitura!");
+            continue;
+        }
+        //! converte para inteiro
+        if (sscanf(input, "%d", &esc) != 1)
+        {
+            printf("Codigo invalido, utilize apenas numeros!");
+            sleep(1);
+            continue;
+        }
+            
             if (esc == 9999)
             {
                 saida(hora_atual, "Multiplicação", v, f);
@@ -533,6 +574,7 @@ void divis()
 void menu_matematica()
 {
     int modo;
+    char input[10];
     while (1)
     {
         system("clear");
@@ -540,7 +582,20 @@ void menu_matematica()
         sleep(1);
         system("clear");
         printf("\t\t\t    \033[33m[999 Sair, 998 Ajuda]\033[m\n\t\t        Digite um codigo de atividade: ");
-        scanf("%d", &modo);
+
+         //! le a entrada como string
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("erro na leitura!");
+            continue;
+        }
+        //! converte para inteiro
+        if (sscanf(input, "%d", &modo) != 1)
+        {
+            printf("Codigo invalido, utilize apenas numeros!");
+            sleep(1);
+            continue;
+        }
         switch (modo)
         {
         case 41:
@@ -589,22 +644,37 @@ void menu_matematica()
 void menu_livro()
 {
     int lv;
+    char input[10];
+    int gab1[10] = {1, 2, 4, 1, 1, 4, 1, 3, 4, 1};
+    int gab2[10] = {3, 4, 3, 4, 3, 1, 3, 1, 2, 4};
     while (1)
     {
-        system("clear");
         printf("\t\t\t   BEM VINDO AO MODO LIVRO\n");
+        system("clear");
         sleep(1);
         system("clear");
         printf("\t\t\t   \033[33m[999 p/ voltar, 998 ajuda]\033[m\n\t\t\t   Digite o codigo do livro: ");
-        scanf("%d", &lv);
+
+        //! le a entrada como string
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("erro na leitura!");
+            continue;
+        }
+        //! converte para inteiro
+        if (sscanf(input, "%d", &lv) != 1)
+        {
+            printf("Codigo invalido, utilize apenas numeros!");
+            sleep(1);
+            continue;
+        }
+
         switch (lv)
         {
         case 31:
-            int gab1[10] = {1, 2, 4, 1, 1, 4, 1, 3, 4, 1};
             livros(gab1, 0);
             break;
         case 32:
-            int gab2[10] = {3, 4, 3, 4, 3, 1, 3, 1, 2, 4};
             livros(gab2, 1);
             break;
         case 998:
@@ -761,6 +831,7 @@ void lista()
 void menu_principal()
 {
     char mensagem[] = "\t\t\tBEM VINDO AO PENSE MAIS OU MENOS";
+    char input[10];
     int n = strlen(mensagem), atv;
 
     // mensagem de boas vindas
@@ -784,7 +855,21 @@ void menu_principal()
     while (1)
     {
         printf("\t\t\t\033[33m[999 Sair, 998 Ajuda, 997 placar]\033[m\n\t\t        Digite um codigo de atividade: \033[7;31m");
-        scanf("%d", &atv);
+
+         //! le a entrada como string
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("erro na leitura!");
+            continue;
+        }
+        //! converte para inteiro
+        if (sscanf(input, "%d", &atv) != 1)
+        {
+            printf("Codigo invalido, utilize apenas numeros!");
+            sleep(1);
+            continue;
+        }
+        
         printf("\033[m");
         if (atv == 999)
         {
