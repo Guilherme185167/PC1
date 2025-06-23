@@ -58,6 +58,7 @@ void sai()
         printf("Erro ao executar o programa externo!\n");
     }
 }
+
 //* Função coin
 void coin()
 {
@@ -68,6 +69,7 @@ void coin()
         printf("Erro ao executar o programa externo!\n");
     }
 }
+
 //* Função entrada
 void entra()
 {
@@ -78,6 +80,7 @@ void entra()
         printf("Erro ao executar o programa externo!\n");
     }
 }
+
 //* Função para pegar a hora atual da execução do codigo e salvar no pontos.txt
 void pegar_hora()
 {
@@ -353,10 +356,10 @@ void divis()
                 }
             }
 
-            // Converter para float com verificação
+            // Converter para float
             esc = strtof(buffer, &endptr);
 
-            // Verificar se a conversão foi bem-sucedida
+            // Verificar a conversão
             if (endptr == buffer)
             {
                 printf("Entrada inválida! Use números decimais com ponto ou vírgula.\n");
@@ -366,6 +369,7 @@ void divis()
 
             if (esc == 9999)
             {
+                saida(hora_atual, "Divisão", v, f);
                 return;
             }
             else if (fabs(esc - res) > 0.01)

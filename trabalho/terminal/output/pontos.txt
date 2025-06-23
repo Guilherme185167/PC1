@@ -1,2 +1,13 @@
 | ===============NOME============== |
-< Guilherme
+< GUILHERME
+Nome: GUILHERME
+
+Data: [23/06/2025 09:10:43]
+3 3 2 2 2 1 1 1 1 1 
+1 2 4 1 1 4 1 3 4 1 Acertos: 2 Erros 8
+| Hora atual: [23/06/2025 09:11:11] |
+| Modo:                         Livro |
+| Dificuldade:                    0 |
+| Acertos:                        0 |
+| Erros:                          0 |
+
